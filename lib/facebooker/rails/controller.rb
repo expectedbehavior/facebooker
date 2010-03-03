@@ -299,7 +299,8 @@ module Facebooker
       end
       
       def application_needs_permission(perm)
-        top_redirect_to(facebook_session.permission_url(perm))
+        top_redirect_to(facebook_session.permission_url(perm, 
+                              :next => "http://apps.facebook.com/#{Facebooker.facebooker_config['canvas_page_name']}"))
       end
       
       def has_extended_permission?(perm)
