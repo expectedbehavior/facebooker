@@ -184,7 +184,26 @@ module Facebooker
     def comment_on(post_id, comment)
       @session.post('facebook.stream.addComment', {:post_id=>post_id, :comment=>comment})
     end
-
+    
+    ###
+    # Get the comments for a post
+    #
+    # See: http://wiki.developers.facebook.com/index.php/Stream.getComments
+    #
+    # +post_id+ the post_id for the post to get the comments for
+    def get_comments(post_id)
+      @session.post('facebook.stream.getComments', {:post_id=>post_id})
+    end
+    
+    ###
+    # Remove a comment from a post
+    #
+    # See: http://wiki.developers.facebook.com/index.php/Stream.removeComment
+    #
+    # +comment_id+ the id of the comment to remove
+    def remove_comment(comment_id)
+      @session.post('facebook.stream.removeComment', {:comment_id=>comment_id})
+    end
 
     ###
     # Publish a comment to a specific comment set by xid

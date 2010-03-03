@@ -265,6 +265,18 @@ module Facebooker
     def self.process(data)
       element('stream_addComment_response', data).content.strip
     end
+  end
+  
+  class StreamRemoveComment < Parser#:nodoc:
+    def self.process(data)
+      element('stream_removeComment_response', data).content.strip
+    end
+  end  
+  
+  class StreamGetComments < Parser#:nodoc:
+    def self.process(data)
+      array_of_hashes(element('stream_getComments_response', data), 'comment')
+    end
   end  
 
   class StreamAddLike < Parser#:nodoc:
@@ -909,6 +921,8 @@ module Facebooker
       'facebook.stream.get' => GetStream,
       'facebook.stream.publish' => StreamPublish,
       'facebook.stream.addComment' => StreamAddComment,
+      'facebook.stream.removeComment' => StreamRemoveComment,
+      'facebook.stream.getComments' => StreamGetComments,
       'facebook.stream.addLike' => StreamAddLike,
       'facebook.events.create' => EventsCreate,
       'facebook.events.cancel' => EventsCancel,
